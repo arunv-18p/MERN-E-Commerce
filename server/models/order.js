@@ -31,10 +31,6 @@ const orderSchema = mongoose.Schema(
         type: String,
         required: true,
       },
-      phoneNumber: {
-        type: String,
-        required: true,
-      },
       postalCode: {
         type: String,
         required: true,
