@@ -1,0 +1,12 @@
+#productsTable {
+    overflow: auto;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+}
+
+.ellipses{
+    width: 50px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
