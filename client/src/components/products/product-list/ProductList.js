@@ -132,7 +132,7 @@ function ProductList() {
       {loading ? (
         <Loader />
       ) : (
-        <div className="container mt-5 py-4 px-xl-5">
+        <div className="container-fluid mt-5 py-4 px-xl-5">
           <nav aria-label="breadcrumb" className="bg-custom-light rounded">
             <ol className="breadcrumb p-3 mb-0">
               <li className="breadcrumb-item">

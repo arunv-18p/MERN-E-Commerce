@@ -11,7 +11,7 @@ const ProductDetailItem = ({ product }) => {
   function changeRating(newRating) {}
   if (product == null) return;
   return (
-    <div className="container mt-5 py-4 px-xl-5">
+    <div className="container-fluid mt-5 py-4 px-xl-5">
       <nav aria-label="breadcrumb" className="bg-custom-light rounded mb-4">
         <ol className="breadcrumb p-3">
           <li className="breadcrumb-item">
