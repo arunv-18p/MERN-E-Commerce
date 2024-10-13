@@ -19,15 +19,11 @@ const registerUser = catchAsyncErrors(async (req, res, next) => {
     confirmPassword,
   } = req.body;
 
-  if (password != confirmPassword) {
-    return next(new ErrorHandler("Passwords don't match", 500));
-  }
+  if (password != confirmPassword) return next(new ErrorHandler("Passwords don't match", 500));
   const passwordHash = await getPasswordHash(password, 10);
   // check whether user is already registered or not
   const isUserExist = await User.findOne({ emailAddress });
-  if (isUserExist) {
-    return next(new ErrorHandler("User is already registered"));
-  }
+  if (isUserExist) return next(new ErrorHandler("User is already registered"));
   const user = {
     firstName,
     lastName,
@@ -44,17 +40,13 @@ const registerUser = catchAsyncErrors(async (req, res, next) => {
 const loginUser = catchAsyncErrors(async (req, res, next) => {
   const { emailAddress, password } = req.body;
   // check if email and password is entered by user
-  if (!emailAddress || !password) {
-    return next(new ErrorHandler("Please enter email & password"));
-  }
+  if (!emailAddress || !password) return next(new ErrorHandler("Please enter email & password"));
   const user = await User.findOne({ emailAddress }).select("+password");
-  if (!user) {
-    return next(new ErrorHandler("Invalid email or password"));
-  }
+  // check if user is exist or not
+  if (!user) return next(new ErrorHandler("Invalid email or password"));
+  // check if password is matched or not
   const isPasswordMatched = await comparePassword(password, user.password.toString());
-  if (!isPasswordMatched) {
-    return next(new ErrorHandler("Invalid email or password"), 404);
-  }
+  if (!isPasswordMatched) return next(new ErrorHandler("Invalid email or password"), 404);
   sendTokenCookie(res, 200, user);
 });
 
@@ -77,9 +69,7 @@ const forgotPassword = catchAsyncErrors(async (req, res, next) => {
   const resetTokenSha256 = await getCryptoTokenSha256(resetToken);
   user.resetTokenSha256 = resetTokenSha256;
   await user.save({ validateBeforeSave: false });
-  const passwordResetURL = `${req.protocol}://${req.get(
-    "host"
-  )}//users/me/password/reset/${resetTokenSha256}`;
+  const passwordResetURL = `${req.protocol}://${req.get("host")}//users/me/password/reset/${resetTokenSha256}`;
   const message = `
         Dear user,\n\n
         Your password reset url is as follow:\n\n
@@ -104,12 +94,8 @@ const resetPassword = catchAsyncErrors(async (req, res, next) => {
   const { token } = req.params;
   const { password, confirmPassword } = req.body;
   const user = await User.findOne({ resetTokenSha256: token });
-  if (!user) {
-    return next(new ErrorHandler("Password reset token is invalid", 400));
-  }
-  if (password != confirmPassword) {
-    return next(new ErrorHandler("Password doesn't match", 404));
-  }
+  if (!user) return next(new ErrorHandler("Password reset token is invalid", 400));
+  if (password != confirmPassword) return next(new ErrorHandler("Password doesn't match", 404));
   const passwordHash = await getPasswordHash(password, 10);
   user.password = passwordHash;
   const newUser = await user.save();

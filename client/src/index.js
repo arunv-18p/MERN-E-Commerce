@@ -1,19 +1,17 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-
 import { Provider } from "react-redux";
-import store from "./store";
-
 import { transitions, positions, Provider as AlertProvider } from "react-alert";
-
-import App from "./App";
 
 import "./configs/bootstrap.custom.scss";
 import "./index.css";
 
 import "../node_modules/bootstrap/dist/js/bootstrap.min.js";
 
-// ALERT OPTIONS
+import store from "./store";
+import App from "./App";
+
+// Alert Options
 const alertOptions = {
   position: positions.TOP_CENTER,
   timeout: 1000,

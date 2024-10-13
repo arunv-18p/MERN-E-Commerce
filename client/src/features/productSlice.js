@@ -98,12 +98,15 @@ const productSlice = createSlice({
   initialState,
   reducers: {},
   extraReducers: (builder) => {
+
+    // search products
     builder.addCase(SEARCH_PRODUCTS, (state, action) => {
       const products = searchProducts(action.payload, state.products);
       state.splitProducts = getSplitItems(products, 10);
       state.loading = false;
     });
 
+    // filter products
     builder.addCase(FILTER_PRODUCTS, (state, action) => {
       const products = filterProducts(action.payload, state.products);
       state.splitProducts = getSplitItems(products, 10);
