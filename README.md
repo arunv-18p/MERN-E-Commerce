@@ -14,6 +14,13 @@ A fully working e-commerce web app developed in MERN (MongoDB, Express.js, React
 - Cart & Order pages
 - And more...
 
+## How To Compile
+- Setup a MongoDB database and create 'products', 'users', 'orders' collections
+- Get data from DummyJSON and add it to 'products' collection
+- Create a .env file in 'root/server' directory and add all necessary environment variables
+- Install npm packages in 'root', 'root/client' 'root/server' directories
+- From 'root' directory, do 'npm start'
+
 ## Screenshots
 ![alt text](./screenshots/sch-2.png)
 ![alt text](./screenshots/sch-3.png)
