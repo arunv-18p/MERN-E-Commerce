@@ -7,7 +7,6 @@ const { getUserFromToken } = require("../controllers/userController.js");
 // api/v1/users/me/orders/new
 const newOrder = catchAsyncErrors(async (req, res, next) => {
   const { token } = req.cookies;
-  const user = await getUserFromToken(token);
   const { billingDetails, userRef, orderItems, prices, paymentType, cardDetails } = req.body;
   const order = await Order.create({
     orderItems,
@@ -47,9 +46,7 @@ const getAllOrders = catchAsyncErrors(async (req, res, next) => {
 
 const updateOrder = catchAsyncErrors(async (req, res, next) => {
   const order = Order.findById(req.params.id);
-  if (!order) {
-    return next(new ErrorHandler("No order found with id"), 404);
-  }
+  if (!order) return next(new ErrorHandler("No order found with id"), 404);
   const result = await Order.findByIdAndUpdate(req.params.id, req.body, {
     new: true,
     runValidators: true,
@@ -63,9 +60,7 @@ const updateOrder = catchAsyncErrors(async (req, res, next) => {
 
 const deleteOrder = catchAsyncErrors(async (req, res, next) => {
   const order = Order.findById(req.params.id);
-  if (!order) {
-    return next(new ErrorHandler("No order found with id"), 404);
-  }
+  if (!order) return next(new ErrorHandler("No order found with id"), 404);
   const result = await order.deleteOne();
   res.status(200).json({
     success: true,

@@ -16,13 +16,12 @@ import CurrentOrders from "./pages/user/current-orders/CurrentOrders";
 import ConfirmCheckout from "./pages/checkout/confirm-checkout/ConfirmCheckout";
 import CheckoutSuccess from "./pages/checkout/checkout-success/CheckoutSuccess";
 import DeliveryInfo from "./pages/checkout/delivery-info/DeliveryInfo";
+import Payment from "./pages/checkout/payment/Payment";
 
 import ProtectedRoute from "./components/protected-route/ProtectedRoute";
 import AdminProductList from "./pages/admin/admin-product-list/AdminProductList";
 import AdminUserList from "./pages/admin/admin-user-list/AdminUserList";
 import AdminProductHandler from "./pages/admin/admin-product-handler/AdminProductHandler";
-
-import Payment from "./pages/checkout/payment/Payment";
 
 const App = () => {
   const dispatch = useDispatch();

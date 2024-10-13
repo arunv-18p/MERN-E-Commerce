@@ -106,6 +106,8 @@ const userSlice = createSlice({
   initialState,
   reducers: {},
   extraReducers: (builder) => {
+
+    // remove all previous errors
     builder.addCase(CLEAR_USER_ERRORS, (state) => {
       state.errorType = null;
       state.errorMessage = null;
@@ -176,7 +178,6 @@ const userSlice = createSlice({
     });
 
     // getAllUsers - /api/v1/users/admin/all
-
     builder.addCase(getAllUsers.fulfilled, (state, action) => {
       state.allUsers = action.payload;
       state.splitUsers = getSplitItems(action.payload, 10);
@@ -188,6 +189,7 @@ const userSlice = createSlice({
       state.loading = false;
     });
 
+    // updateUserProfile - /api/v1/users/me/update
     builder.addCase(updateUserProfile.pending, (state) => {
       state.loading = true;
     });

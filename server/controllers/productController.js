@@ -37,7 +37,6 @@ const getProductByCategory = catchAsyncErrors(async (req, res, next) => {
 
 // api/v1/products/admin/new
 const addProductToDB = catchAsyncErrors(async (req, res, next) => {
-
     const product = await Product.create(req.body);
     if (!product) return next(new ErrorHandler("Failed to add product to db"));
     res.status(200).json({

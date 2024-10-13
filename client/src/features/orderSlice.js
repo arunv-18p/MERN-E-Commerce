@@ -33,6 +33,8 @@ const orderSlice = createSlice({
   initialState,
   reducers: {},
   extraReducers: (builder) => {
+
+    // createOrder - /api/v1/users/me/orders/new
     builder.addCase(createOrder.pending, (state) => {
       state.loading = true;
       state.orderSuccess = false;
@@ -47,10 +49,12 @@ const orderSlice = createSlice({
       state.userOrders = [];
     });
 
+    // reset orders
     builder.addCase(RESET_ORDER_SUCCESS, (state) => {
         state.orderSuccess = false;
     })
 
+    // getMyOrders - /api/v1/users/me/orders
     builder.addCase(getMyOrders.pending, (state) => {
       state.loading = true;
     });
